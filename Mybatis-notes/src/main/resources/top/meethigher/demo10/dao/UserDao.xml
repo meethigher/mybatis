@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.meethigher.demo10.dao.UserDao">
+    <resultMap id="userAccountMap" type="User">
+        <id property="uid" column="uid"></id>
+        <result property="username" column="username"></result>
+        <result property="sex" column="sex"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="address" column="address"></result>
+        <collection property="accounts" column="uid" ofType="Account" select="top.meethigher.demo10.dao.AccountDao.findById"></collection>
+    </resultMap>
+    <select id="findById" resultType="User" parameterType="Integer">
+        select * from user where uid=#{id};
+    </select>
+    <select id="findAll" resultMap="userAccountMap">
+        select * from user;
+    </select>
+</mapper>

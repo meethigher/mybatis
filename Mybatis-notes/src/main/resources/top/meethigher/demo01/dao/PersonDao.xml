@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.meethigher.demo01.dao.PersonDao">
+    <!--配置查询所有 id为方法名称，将获取到的数据封装到resultType这里面-->
+    <select id="findAll" resultType="top.meethigher.demo01.domain.Person">
+		select * from fairy
+	</select>
+</mapper>

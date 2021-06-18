@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--Mybatis主配置文件-->
+<configuration>
+    <!--配置环境-->
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--配置事务类型-->
+            <transactionManager type="JDBC"/>
+            <!--配置数据源(连接池)-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--指定映射配置文件的位置，映射配置文件指的是每个dao独立的配置文件-->
+    <!--如果是xml的话，通过resource指定配置文件-->
+    <!--如果是注解的话，通过class加载类文件-->
+    <mappers>
+        <mapper resource="top/meethigher/demo01/dao/PersonDao.xml"/>
+        <mapper resource="top/meethigher/demo04/dao/PersonDao.xml"/>
+        <mapper resource="top/meethigher/demo05/dao/PersonDao.xml"/>
+        <mapper resource="top/meethigher/demo03/dao/PersonDao.xml"/>
+        <mapper resource="top/meethigher/demo06/dao/PersonDao.xml"/>
+        <mapper resource="top/meethigher/demo07/dao/PersonDao.xml"/>
+    </mappers>
+</configuration>

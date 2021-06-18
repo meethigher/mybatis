@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.meethigher.demo10.dao.AccountDao">
+    <resultMap id="accountUserMap" type="Account">
+        <id property="aid" column="aid"></id>
+        <result property="uid" column="uid"></result>
+        <result property="money" column="money"></result>
+        <!-- column指定的内容就是account中的uid，用来作为findById的参数进行查询
+        select指定查询用户的唯一标识，也就是用户配置文件中select的id-->
+        <association property="user" column="uid" javaType="User" select="top.meethigher.demo10.dao.UserDao.findById"></association>
+    </resultMap>
+    <select id="findAll" resultMap="accountUserMap">
+        select * from account;
+    </select>
+
+    <select id="findById" parameterType="Integer" resultType="Account">
+        select * from account where uid=#{uid};
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+<!-- 
+<Resource 
+name 数据源的名称
+type 数据源类型
+auth 数据源提供者
+maxA 最大活动数
+maxWait 最大等待时间
+maxIdle 最大空闲数
+username 用户名
+password 密码
+driverClassName 驱动类
+url 连接url字符串
+/>
+ -->
+<Resource 
+name="jdbc/mybatis"
+type="javax.sql.DataSource"
+auth="Container"
+maxActive="20"
+maxWait="10000"
+maxIdle="5"
+username="root"
+password="root"
+driverClassName="com.mysql.cj.jdbc.Driver"
+url="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai"
+/>
+</Context>

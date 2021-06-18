@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.meethigher.demo09.dao.AccountDao">
+    <resultMap id="accountUserMap" type="Account">
+        <id property="aid" column="aid"></id>
+        <result property="uid" column="uid"></result>
+        <result property="money" column="money"></result>
+        <!--建立一对一关系映射 property对应Account中的user属性，column对应外键对应的列，后面的属性不填，mybatis也会智能识别-->
+        <association property="user" column="uid" javaType="User">
+            <id column="uid" property="uid"></id>
+            <result property="username" column="username"></result>
+            <result property="sex" column="sex"></result>
+            <result property="birthday" column="birthday"></result>
+            <result property="address" column="address"></result>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="accountUserMap">
+        select * from user,account where user.uid=account.uid;
+    </select>
+    <select id="findAllAccount" resultType="AccountUser">
+        select a.*,u.username,u.address from account a,user u where a.uid=u.uid;
+    </select>
+</mapper>

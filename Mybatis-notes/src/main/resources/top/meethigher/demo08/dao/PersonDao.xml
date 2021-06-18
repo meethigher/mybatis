@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.meethigher.demo08.dao.PersonDao">
+    <sql id="defaultPerson">
+        select * from fairy
+    </sql>
+    <select id="findAll" resultType="Person">
+        <include refid="defaultPerson"></include>
+    </select>
+
+    <select id="findPersonById" parameterType="Integer" resultType="Person">
+        <include refid="defaultPerson"></include>
+        where id=#{id};
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="Person">
+        <include refid="defaultPerson"></include>
+        where name like #{name};
+    </select>
+
+    <select id="findPersonByVo" parameterType="QueryVo" resultType="Person">
+        <include refid="defaultPerson"></include>
+        where name like #{person.name}
+    </select>
+
+    <!--<select id="findByCondition" parameterType="Person" resultType="Person">
+        select * from fairy where 1=1
+        <if test="name != null">
+        and name=#{name}
+        </if>
+        <if test="gender!=null">
+            and gender=#{gender}
+        </if>
+        <if test="age!=null">
+            and age=#{age}
+        </if>
+    </select>-->
+
+    <!--如果不想写1=1的这种写法，可以尝试用where标签-->
+    <select id="findByCondition" parameterType="Person" resultType="Person">
+        <include refid="defaultPerson"></include>
+        <where>
+            <if test="name != null">
+                and name=#{name}
+            </if>
+            <if test="gender!=null">
+                and gender=#{gender}
+            </if>
+            <if test="age!=null">
+                and age=#{age}
+            </if>
+        </where>
+    </select>
+
+    <!--根据QueryVo中的id集合，查询-->
+    <select id="findByIds" parameterType="QueryVo" resultType="Person">
+        <include refid="defaultPerson"></include>
+        <where>
+            <if test="ids!=null and ids.size()>0">
+                <foreach collection="ids" open="and id in(" close=")" item="id" separator=",">
+                    ${id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>
